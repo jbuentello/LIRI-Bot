@@ -1,0 +1,5 @@
+#Dont track contenet of these folders
+node_modules/
+.DS_Store
+.env
+
