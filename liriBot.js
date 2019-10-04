@@ -25,7 +25,6 @@ switch (choose) {
     } else {
       spotifyThis("My Heart Will Go On");
     }
-    spotifyThis(query);
     break;
   case "concert-this":
     concertThis(query);
@@ -47,27 +46,19 @@ function spotifyThis(songText){
     }
     else {
       var musicInfo = data.tracks.items[0];
-      var spotifyItems = {
-        Artist: musicInfo.artists[0].name,
-        Songs: musicInfo.name,
-        Preview: musicInfo.preview_url,
-        Album: musicInfo.album.name
-      }
-      console.log(spotifyItems);
-      // console.log(songText);
-      // for(var i = 0; i < data.tracks.items.length; i++){
-      //   console.log('Artist: ' + musicInfo.artists[0].name);
-      //   console.log('Songs: ' + musicInfo.name);
-      //   console.log('Preview: ' + musicInfo.preview_url);
-      //   console.log('Album: ' + musicInfo.album.name);
+      // var spotifyItems = {
+      //   Artist: musicInfo.artists[0].name,
+      //   Songs: musicInfo.name,
+      //   Preview: musicInfo.preview_url,
+      //   Album: musicInfo.album.name
       // }
-      // console.log(data.tracks.items);
+      console.log("\n_Song Info_" + "\nArtist: " + musicInfo.artists[0].name + "\nSongs: " + musicInfo.name + "\nPreview: " + musicInfo.preview_url + "\nAlbum: " + musicInfo.album.name);
     }
-      // return console.log('error: ' + err);
-    });
+    // return console.log('error: ' + err);
+  });
   // console.log("Run");  
 }
-  //Create Movie Function with Default Movie
+//Create Movie Function with Default Movie
 function movieThis(movieName) {
   if (!movieName) {
     movieName = "Mr.Nobody";
@@ -88,7 +79,6 @@ function concertThis(artist) {
   axios.get(bandsURL).then(function (response) {
     console.log("Artist: " + artist + "\nVenue: " + response.data[0].venue.name + "\nLocation: " + response.data[0].venue.country + "\nDate: " + response.data[0].datetime + "\nGET OUR ROCK ON!");
     console.log("_Upcoming Events_");
-    // console.log(response);
   });
 }
 

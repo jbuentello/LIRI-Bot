@@ -21,5 +21,8 @@ This is the format in which the searches should be executed;
 
 "node liriBot.js spotify-this-song Gangsta"
 
-GitHub Page:
+GitHub Page: https://github.com/jbuentello/LIRI-Bot
+
+
+
 
