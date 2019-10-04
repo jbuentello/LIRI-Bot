@@ -1,6 +1,6 @@
-// Global Vars Set to pull folders and API
+
 require("dotenv").config();
-//Pull Keys from Seperate folder(No commas in folder, wouldnt work correctly)
+
 var keys = require("./keys.js");
 
 var axios = require("axios");
@@ -14,7 +14,6 @@ var fs = require("fs");
 var choose = process.argv[2];
 var query = process.argv[3];
 
-// console.log(choose);
 
 var spotify = new Spotify(keys.spotify);
 
@@ -36,7 +35,6 @@ switch (choose) {
     doThis();
     break;
   default:
-    // console.log("Please type: node liriBot.js <function> <argument>")
 }
 
 function spotifyThis(songText){
@@ -46,25 +44,18 @@ function spotifyThis(songText){
     }
     else {
       var musicInfo = data.tracks.items[0];
-      // var spotifyItems = {
-      //   Artist: musicInfo.artists[0].name,
-      //   Songs: musicInfo.name,
-      //   Preview: musicInfo.preview_url,
-      //   Album: musicInfo.album.name
-      // }
       console.log("\n_Song Info_" + "\nArtist: " + musicInfo.artists[0].name + "\nSongs: " + musicInfo.name + "\nPreview: " + musicInfo.preview_url + "\nAlbum: " + musicInfo.album.name);
     }
-    // return console.log('error: ' + err);
+    
   });
-  // console.log("Run");  
+  
 }
-//Create Movie Function with Default Movie
 function movieThis(movieName) {
   if (!movieName) {
     movieName = "Mr.Nobody";
   }
   var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy"
-  //Axios Request
+  
   axios.get(queryUrl).then(
     function(response) {
       if (!movieName) {
