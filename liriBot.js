@@ -1,6 +1,6 @@
-
+// Global Vars Set to pull folders and API
 require("dotenv").config();
-
+//Pull Keys from Seperate folder(No commas in folder, wouldnt work correctly)
 var keys = require("./keys.js");
 
 var axios = require("axios");
@@ -34,7 +34,7 @@ switch (choose) {
     movieThis(query);
     break;
   case "do-what-it-says":
-    doThis(query);
+    doThis();
     break;
   default:
     // console.log("Please type: node liriBot.js <function> <argument>")
@@ -66,28 +66,35 @@ function spotifyThis(songText){
       // return console.log('error: ' + err);
     });
   // console.log("Run");  
-  }
+}
   //Create Movie Function with Default Movie
-  function movieThis(movieName) {
-    if (!movieName) {
-      movieName = "Mr.Nobody";
-    }
-    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy"
-    //Axios Request
-    axios.get(queryUrl).then(
-      function(response) {
-        if (!movieName) {
-          movieName="Mr.Nobody";}
-          console.log("\n_Movie Info_" + "\nTitle: " + response.data.Title + "\nRelease Year: " + response.data.Year + "\nRating: " + response.data.Rated + "\nRelease Country: " + response.data.Country + "\nLanguage: " + response.data.Language + "\nPlot: " + response.data.Plot + "\nActors: " + response.data.Actors + "\n" + "\n GREAT MOVIE!");
-        }
-    );
+function movieThis(movieName) {
+  if (!movieName) {
+    movieName = "Mr.Nobody";
   }
+  var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy"
+  //Axios Request
+  axios.get(queryUrl).then(
+    function(response) {
+      if (!movieName) {
+        movieName="Mr.Nobody";}
+        console.log("\n_Movie Info_" + "\nTitle: " + response.data.Title + "\nRelease Year: " + response.data.Year + "\nRating: " + response.data.Rated + "\nRelease Country: " + response.data.Country + "\nLanguage: " + response.data.Language + "\nPlot: " + response.data.Plot + "\nActors: " + response.data.Actors + "\n" + "\n GREAT MOVIE!");
+      }
+  );
+}
 
-  function concertThis(artist) {
-    var bandsURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
-    axios.get(bandsURL).then (
-      function (response) {
-        console.log("Artist: " + artist + "\nVenue: " + response.data[0].venue.name + "\nLocation: " + response.data[0].venue.country + "\nDate: " + response.data[0].datatime + "\nGET OUR ROCK ON!");
-        console.log("_Upcoming Events_");
-      });
-    }
+function concertThis(artist) {
+  var bandsURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+  axios.get(bandsURL).then(function (response) {
+    console.log("Artist: " + artist + "\nVenue: " + response.data[0].venue.name + "\nLocation: " + response.data[0].venue.country + "\nDate: " + response.data[0].datetime + "\nGET OUR ROCK ON!");
+    console.log("_Upcoming Events_");
+    // console.log(response);
+  });
+}
+
+function doThis() {
+  fs.readFile("random.txt", "utf8", function(error, data){
+    var dataArr= data.split(",");
+    spotifyThis(dataArr[1]);
+  })
+};
